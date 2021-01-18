@@ -60,7 +60,6 @@ class Main extends React.Component{
     }
 
     render() {
-        console.log(localStorage.getItem('jwt'), Date.now()<localStorage.getItem('expiry'), localStorage.getItem('expiry'));
         return (
             <main>
                 <App loginInput={this.handleLoginInput} handleLogout={this.handleLogout} loginResult={this.loginFailed} />

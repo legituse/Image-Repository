@@ -23,6 +23,7 @@ class Upload extends React.Component {
         }
         this.imageInput = React.createRef();
         this.tagInput = React.createRef();
+        this.filenameText = React.createRef();
         this.addTag = this.addTag.bind(this);
         this.uploadImg = this.uploadImg.bind(this);
     }
@@ -40,8 +41,8 @@ class Upload extends React.Component {
 
     updateName(e){
         let filename=e.target.value.split("\\").pop();
-        e.target.nextSibling.classList.add("selected")
-        e.target.nextSibling.innerHTML=filename;
+        this.filenameText.current.classList.add("selected");
+        this.filenameText.current.innerHTML=filename;
     }
 
     uploadImg(e){
@@ -52,7 +53,6 @@ class Upload extends React.Component {
         const form = new FormData();
         let fileEXT = this.imageInput.current.files[0].name.split('.').pop();
         form.append(this.imageInput.current.name, this.imageInput.current.files[0], this.state.tags.join('-')+'.'+fileEXT);
-        console.log(this.imageInput.current);
         fetch("http://localhost:80/imagerepo/server/services/uploadImage.php", {
             headers: new Headers({
                 "Authorization" : "Bearer "+localStorage.getItem('jwt')
@@ -69,7 +69,6 @@ class Upload extends React.Component {
                     window.location.reload(false);
                 }
                 return response.json()})
-            .then(data => console.log(data))
             .catch(err => {
             console.error(err);
         });
@@ -77,7 +76,7 @@ class Upload extends React.Component {
 
     render() {
 
-        let tags=<p> </p>;
+        let tags=<p> </p>;
         let numTags = this.state.tags.length;
         if (numTags>0){
             tags = []
@@ -92,7 +91,7 @@ class Upload extends React.Component {
                 <form>
                     <div className="custom-file">
                         <input type="file" name="imageFile" className="custom-file-input" id="imageFile" accept="image/*" ref={this.imageInput} onChange={(e) => this.updateName(e)} />
-                        <label className="custom-file-label" htmlFor="customFile">Choose file</label>
+                        <label className="custom-file-label" htmlFor="customFile" ref={this.filenameText}>Choose file</label>
                     </div>
                     <h3 className="my-sm-4">Add Some Tags That Describe The Image</h3>
                     <small className="float-md-right">1 Word Per Tag & Max 8</small>

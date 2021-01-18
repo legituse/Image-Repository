@@ -8,13 +8,12 @@ class Homepage extends React.Component{
         this.state={
             data: null,
         }
-        this.searchTerm = this.searchTerm.bind(this);
-        this.searchImages = this.searchImages.bind(this);
-        this.searchImages("");
+        this.getLatestImages = this.getLatestImages.bind(this);
+        this.getLatestImages();
     }
 
-    searchImages(str){
-        fetch("http://localhost/imagerepo/server/services/getImage.php"+str, {
+    getLatestImages(){
+        fetch("http://localhost/imagerepo/server/services/getLatestImages.php", {
             method: "GET"
         }).then((response) => {
             if (response.status===404){
@@ -28,23 +27,16 @@ class Homepage extends React.Component{
             })
     }
 
-    searchTerm(e){
-        e.preventDefault();
-        let searchTerm = e.target.parentElement.children[0].value;
-        if (searchTerm.length>2){
-            this.searchImages("?search="+searchTerm);
-        }
-        e.target.parentElement.children[0].value=null;
-    }
+   
 
     render() {
-        let images = <p>No Access</p>;
+        let images = <p>No Data</p>;
         if (this.state.data){
             images=[];
             for (const name in this.state.data) {
                 images.push(
-                    <div className="col-lg-4 col-md-4 col-xs-6">
-                        <img className="img-thumbnail" key={name} src={this.state.data[name]} alt={name}   />
+                    <div key={name.split("-")[0]} className="col-lg-4 col-md-4 col-xs-6">
+                        <img className="img-thumbnail" key={name.split("-")[0]} src={this.state.data[name]} alt={name}   />
                     </div>
                 );
             }
