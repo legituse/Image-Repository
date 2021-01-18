@@ -24,15 +24,6 @@ $data = json_decode(file_get_contents("php://input"));
 
 $sql = "SELECT * FROM " . 'images' . " ORDER BY id DESC LIMIT 6";
 
-if (isset($_GET['search'])){
-    $words = explode(" ",$_GET['search']);
-    $sql = "SELECT * FROM " . 'images'. " WHERE imagepath LIKE '%".$words[0]."%'";
-    if(count($words)>1){
-        for($x = 1; $x< count($words); $x++){
-            $sql= $sql . " OR imagepath LIKE '%" . $words[$x] ."%'";
-        }
-    }
-}
 
 $query = $conn->prepare($sql);
 $query->execute();
@@ -55,6 +46,5 @@ if ($num > 0) {
 
 }else{
     http_response_code(404);
-    echo json_encode($images);
-
+    echo json_encode("Error");
 }
