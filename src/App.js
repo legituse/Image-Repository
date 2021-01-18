@@ -36,10 +36,6 @@ class App extends React.Component{
 
 
                         </ul>
-                        <form className="form-inline mx-lg-4">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={(e) => this.searchTerm(e)}>Search</button>
-                        </form>
                         <Link to='/logout'>
                             <button className={(localStorage.getItem('jwt')!==null)? "btn btn-outline-danger" : "btn btn-outline-primary"} type="button">{(localStorage.getItem('jwt')!==null)? "Logout" : "Login"}</button>
                         </Link>
@@ -58,7 +54,7 @@ class App extends React.Component{
                     <Route path="/logout">
                         <Logout handleLogout={this.props.handleLogout} />
                     </Route>
-                    <Route path="/getImages">
+                    <Route path="/all">
                         <Images />
                     </Route>
                     <Route path="/upload">
