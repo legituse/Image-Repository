@@ -1,6 +1,11 @@
 # Image-Repository
 Node JS + PHP Image Repository 
 
+# TO-DO
+- Add Register Page to front-end
+- Add More Error Checking UI to Upload Images
+- Allow for Private Image Uploads
+- Make a user Uploaded Image Page
 
 # Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
