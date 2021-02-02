@@ -2,7 +2,6 @@ import './App.css';
 import Login from "./login/Login";
 import Homepage from "./homepage/Homepage";
 import Logout from "./logout/Logout"
-import Usernames from "./getData/Usernames"
 import Images from "./getImages/Images";
 import Upload from "./uploadImage/Upload";
 import React from 'react';
@@ -47,9 +46,6 @@ class App extends React.Component{
                     </Route>
                     <Route path="/login">
                         {(localStorage.getItem('expiry')!==null && localStorage.getItem('jwt')!==null && Date.now()<localStorage.getItem('expiry') )? <Redirect to="/"/> : <Login loginInput={this.props.loginInput} loginResult={this.props.loginResult} /> }
-                    </Route>
-                    <Route path="/getData">
-                        <Usernames />
                     </Route>
                     <Route path="/logout">
                         <Logout handleLogout={this.props.handleLogout} />
