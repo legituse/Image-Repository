@@ -4,6 +4,7 @@ import Homepage from "./homepage/Homepage";
 import Logout from "./logout/Logout"
 import Images from "./getImages/Images";
 import Upload from "./uploadImage/Upload";
+import Register from "./register/Register";
 import React from 'react';
 import {Route, Switch, Redirect, Link} from 'react-router-dom';
 
@@ -43,6 +44,9 @@ class App extends React.Component{
                 <Switch>
                     <Route path="/" exact>
                         <Homepage />
+                    </Route>
+                    <Route path="/register" exact>
+                        <Register />
                     </Route>
                     <Route path="/login">
                         {(localStorage.getItem('expiry')!==null && localStorage.getItem('jwt')!==null && Date.now()<localStorage.getItem('expiry') )? <Redirect to="/"/> : <Login loginInput={this.props.loginInput} loginResult={this.props.loginResult} /> }

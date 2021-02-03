@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 
 class Login extends React.Component{
@@ -55,7 +56,7 @@ class Login extends React.Component{
                         <button className="btn btn-primary" type="submit" id="loginButton" >Log in</button>
                     </div>
                 </form>
-                <p className="text-center"><a href="./registerPage.php">Create an Account</a></p>
+                <p className="text-center"><Link className="nav-link" to={'/register'}>Create an Account</Link></p>
                 <Modal show={this.state.showModal || this.errorMessage.length>0} onHide={() => this.closeModal()}>
                     <Modal.Header closeButton>
                         <Modal.Title>Error</Modal.Title>
